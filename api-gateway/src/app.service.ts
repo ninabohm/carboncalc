@@ -9,7 +9,7 @@ export class AppService {
   ){}
 
   getCertificates() {
-    console.log('api-gateway service getting certificates')
+    console.log("send message: 'get_certificates'");
     this.certificateClient
         .send('get_certificates', new GetCertificatesRequest())
         .subscribe()
