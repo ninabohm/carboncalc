@@ -6,7 +6,7 @@ import {ClientKafka, EventPattern, MessagePattern} from "@nestjs/microservices";
 export class AppController implements OnModuleInit {
   constructor(
       private readonly appService: AppService,
-      @Inject('AUTH_SERVICE') private readonly authClient: ClientKafka,
+      @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
   ) {}
 
   @MessagePattern('get_certificates')
@@ -22,7 +22,6 @@ export class AppController implements OnModuleInit {
   }
 
   onModuleInit() {
-    // this.authClient.subscribeToResponseOf('identify_user');
-    this.authClient.subscribeToResponseOf('get_user');
+    this.userClient.subscribeToResponseOf('identify_user');
   }
 }

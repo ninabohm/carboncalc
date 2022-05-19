@@ -1,4 +1,4 @@
-export class IdentifyUserRequest {
+export class RetrieveUserRequest {
     constructor(public readonly userId: string) {
     }
     toString() {
