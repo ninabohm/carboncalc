@@ -1,7 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
+import {CertificateBoughtEvent} from "./certificate-bought.event";
+import {ClientKafka} from "@nestjs/microservices";
+import {IdentifyUserRequest} from "./identify-user-request.dto";
+
 
 @Injectable()
 export class AppService {
+  constructor(
+      @Inject('AUTH_SERVICE') private readonly authClient: ClientKafka,
+  ) {
+  }
+
   private readonly certificates: any[] = [
     {
       certificateId: '07ee9478-2b06-4581-9906-b1325e68885d',
@@ -26,5 +35,14 @@ export class AppService {
   getCertificates() {
     console.log("returning certificates: ");
     console.log(this.certificates);
+  }
+
+  buyCertificate(certificateBoughtEvent: CertificateBoughtEvent) {
+    console.log("sending message to get user'");
+    this.authClient
+        .send('get_user', new IdentifyUserRequest(certificateBoughtEvent.userId))
+        .subscribe((user) => {
+          console.log(`charging user ${user} a price of ${certificateBoughtEvent.price} for certificate ${certificateBoughtEvent.certificateId}`);
+        })
   }
 }
