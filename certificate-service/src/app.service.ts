@@ -10,7 +10,6 @@ export class AppService {
       @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
   ) {
   }
-  public currentUser;
   public readonly certificates: any[] = [
     {
       certificateId: '07ee9478-2b06-4581-9906-b1325e68885d',
@@ -46,9 +45,9 @@ export class AppService {
         .send('identify_user', new RetrieveUserRequest(certificateBoughtEvent.userId))
         .subscribe((user) => {
           console.log(`charging user ${user.userId} a price of ${certificateBoughtEvent.price} for certificate ${certificateBoughtEvent.certificateId}`);
-          this.currentUser = user;
+          this.assignCertificate(this.certificates, certificateBoughtEvent.certificateId, user.userId);
         })
-  this.assignCertificate(this.certificates, certificateBoughtEvent.certificateId, this.currentUser.userId);
+
   }
 
   assignCertificate(certificates: any[], certificateId: string, userId: string) {
