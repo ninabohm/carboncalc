@@ -10,7 +10,7 @@ npm run start:dev"'
 osascript -e 'tell app "Terminal" to do script "cd /Users/ninabohm/Development/uni/vska/carboncalc/certificate-service
 npm run start:dev"'
 
-osascript -e 'tell app "Terminal" to do script "cd /Users/ninabohm/Development/uni/vska/carboncalc/auth
+osascript -e 'tell app "Terminal" to do script "cd /Users/ninabohm/Development/uni/vska/carboncalc/user-service
 npm run start:dev"'
 
 
