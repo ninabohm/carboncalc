@@ -10,25 +10,28 @@ export class AppService {
       @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
   ) {
   }
-
-  private readonly certificates: any[] = [
+  public currentUser;
+  public readonly certificates: any[] = [
     {
       certificateId: '07ee9478-2b06-4581-9906-b1325e68885d',
       sizeHectare: 40,
       storagePotential: 0.4,
-      carbonStorageTonnes: 4800
+      carbonStorageTonnes: 4800,
+      userId: null
     },
     {
       certificateId: '8cf715f7-af4a-4805-9341-d4013a4a028f',
       sizeHectare: 20,
       storagePotential: 0.9,
-      carbonStorageTonnes: 5400
+      carbonStorageTonnes: 5400,
+      userId: null
     },
     {
       certificateId: '6c123d0c-0e3b-4637-9376-361189097762',
       sizeHectare: 200,
       storagePotential: 0.1,
-      carbonStorageTonnes: 6000
+      carbonStorageTonnes: 6000,
+      userId: null
     },
   ]
 
@@ -42,7 +45,23 @@ export class AppService {
     this.userClient
         .send('identify_user', new RetrieveUserRequest(certificateBoughtEvent.userId))
         .subscribe((user) => {
-          console.log(`charging user ${user} a price of ${certificateBoughtEvent.price} for certificate ${certificateBoughtEvent.certificateId}`);
+          console.log(`charging user ${user.userId} a price of ${certificateBoughtEvent.price} for certificate ${certificateBoughtEvent.certificateId}`);
+          this.currentUser = user;
         })
+  this.assignCertificate(this.certificates, certificateBoughtEvent.certificateId, this.currentUser.userId);
+  }
+
+  assignCertificate(certificates: any[], certificateId: string, userId: string) {
+    let certIndex = this.identifyCertificate(certificates, certificateId);
+    this.certificates[certIndex].userId = userId;
+    return this.certificates[certIndex];
+  }
+
+  identifyCertificate(certificates: any[], certificateId: string) {
+    return this.certificates.findIndex(certificate => certificate.certificateId === certificateId);
+  }
+
+  findAll() {
+    return this.certificates;
   }
 }

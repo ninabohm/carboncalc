@@ -21,6 +21,10 @@ export class AppController implements OnModuleInit {
     this.appService.buyCertificate(data.value);
   }
 
+  findAll() {
+    return this.appService.findAll();
+  }
+
   onModuleInit() {
     this.userClient.subscribeToResponseOf('identify_user');
   }
