@@ -44,7 +44,11 @@ export class AppService {
     this.userClient
         .send('identify_user', new RetrieveUserRequest(certificateBoughtEvent.userId))
         .subscribe((user) => {
-          console.log(`charging user ${user.userId} a price of ${certificateBoughtEvent.price} for certificate ${certificateBoughtEvent.certificateId}`);
+          console.log(`
+            charging user ${user.userId} 
+            a price of ${certificateBoughtEvent.price} 
+            for certificate ${certificateBoughtEvent.certificateId}
+            `);
           this.assignCertificate(this.certificates, certificateBoughtEvent.certificateId, user.userId);
         })
 

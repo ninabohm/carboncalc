@@ -12,11 +12,9 @@ export class AppService {
 
   getCertificates() {
     console.log("send message: 'get_certificates'");
-    let certificates = this.certificateClient
+    this.certificateClient
         .send('get_certificates', new GetCertificatesRequest())
         .subscribe();
-
-    return certificates;
   }
 
   buyCertificate({ userId, price, certificateId }: BuyCertificateRequest) {

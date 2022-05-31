@@ -22,6 +22,7 @@ export class AppController implements OnModuleInit {
     this.appService.buyCertificate(buyCertificateRequest);
   }
 
+
   onModuleInit(): any {
     this.certificateClient.subscribeToResponseOf('get_certificates');
   }
