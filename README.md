@@ -8,12 +8,17 @@ User data is handled in the user service, certificate data is handles in the cer
 
 # Setup 
 
-1. Install Apache Kafka https://kafka.apache.org/quickstart
-2. start zookeeper according to the instructions in 1.
-3. start kafka according to the instructions in 1.
-4. clone repo & cd into `carboncalc`
-5. run `npm install`
-6. open a new terminal window, cd into `user-service` and run `npm run start:dev`
-7. open a new terminal window, cd into `certificate-service` and run `npm run start:dev`
-8. open a new terminal window, cd into `api-gateway` and run `npm run start:dev`
-9. open Postman and send a `GET`request to `http://localhost:3001/certificate`to get all certificates
+Prerequisites:
+1. IDE of your choice installed, e.g. IntelliJ or VSCode
+2. Install Java Runtime Environment 
+3. Install Apache Kafka https://kafka.apache.org/quickstart
+
+Copy code & run services:
+1. start zookeeper according to the instructions in 1.
+2. start kafka according to the instructions in 1.
+3. clone repo & cd into `carboncalc`
+4. run `npm install`
+5. open a new terminal window, cd into `user-service` and run `npm run start:dev`
+6. open a new terminal window, cd into `certificate-service` and run `npm run start:dev`
+7. open a new terminal window, cd into `api-gateway` and run `npm run start:dev`
+8. open Postman and send a `GET`request to `http://localhost:3001/certificate`to get all certificates
