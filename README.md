@@ -18,7 +18,13 @@ Copy code & run services:
 2. start kafka according to the instructions in 1.
 3. clone repo & cd into `carboncalc`
 4. run `npm install`
-5. open a new terminal window, cd into `user-service` and run `npm run start:dev`
-6. open a new terminal window, cd into `certificate-service` and run `npm run start:dev`
-7. open a new terminal window, cd into `api-gateway` and run `npm run start:dev`
+5. open a new terminal window, cd into `user-service` and run 
+   1. `npm install`
+   2. `npm run start:dev`
+6. open a new terminal window, cd into `certificate-service` and run 
+   1. `npm install`
+   2. `npm run start:dev`
+7. open a new terminal window, cd into `api-gateway` and run
+   1. `npm install`
+   2. `npm run start:dev`
 8. open Postman and send a `GET`request to `http://localhost:3001/certificate`to get all certificates
