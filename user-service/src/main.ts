@@ -17,5 +17,6 @@ async function bootstrap() {
       }
   );
   app.listen();
+  console.log('user-service listening')
 }
 bootstrap();
