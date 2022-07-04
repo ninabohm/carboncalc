@@ -2,41 +2,18 @@ import {Inject, Injectable} from '@nestjs/common';
 import {CertificateBoughtEvent} from "./certificate-bought.event";
 import {ClientKafka} from "@nestjs/microservices";
 import {RetrieveUserRequest} from "./retrieve-user-request.dto";
+import certificates from '../db/certificates-db';
 
 
 @Injectable()
 export class AppService {
   constructor(
       @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
-  ) {
-  }
-  public readonly certificates: any[] = [
-    {
-      "certificateId": "1337",
-      "sizeHectare": 40,
-      "storagePotential": 0.4,
-      "carbonStorageTonnes": 4800,
-      "userId": null
-    },
-    {
-      "certificateId": '1338',
-      "sizeHectare": 20,
-      "storagePotential": 0.9,
-      "carbonStorageTonnes": 5400,
-      "userId": null
-    },
-    {
-      "certificateId": '1339',
-      "sizeHectare": 200,
-      "storagePotential": 0.1,
-      "carbonStorageTonnes": 6000,
-      "userId": null
-    },
-  ]
+  ) {}
 
   getCertificates() {
     console.log("returning certificates: ");
-    console.log(this.certificates);
+    console.log(certificates);
   }
 
   buyCertificate(certificateBoughtEvent: CertificateBoughtEvent) {
@@ -49,22 +26,22 @@ export class AppService {
             a price of ${certificateBoughtEvent.price} 
             for certificate ${certificateBoughtEvent.certificateId}
             `);
-          this.assignCertificate(this.certificates, certificateBoughtEvent.certificateId, user.userId);
+          this.assignCertificate(certificates, certificateBoughtEvent.certificateId, user.userId);
         })
 
   }
 
   assignCertificate(certificates: any[], certificateId: string, userId: string) {
     let certIndex = this.identifyCertificate(certificates, certificateId);
-    this.certificates[certIndex].userId = userId;
-    return this.certificates[certIndex];
+    certificates[certIndex].userId = userId;
+    return certificates[certIndex];
   }
 
   identifyCertificate(certificates: any[], certificateId: string) {
-    return this.certificates.findIndex(certificate => certificate.certificateId === certificateId);
+    return certificates.findIndex(certificate => certificate.certificateId === certificateId);
   }
 
   findAll() {
-    return this.certificates;
+    return certificates;
   }
 }
