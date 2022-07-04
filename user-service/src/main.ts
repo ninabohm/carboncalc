@@ -8,14 +8,15 @@ async function bootstrap() {
         transport: Transport.KAFKA,
         options: {
           client: {
-            brokers: ['localhost:9092'] //same port as in billing app.module
+            brokers: ['localhost:9092']
           },
           consumer: {
-            groupId: 'user-service-consumer' //same groupId as in billing app.module
+            groupId: 'user-service-consumer'
           }
         }
       }
   );
   app.listen();
+  console.log("user-service listening");
 }
 bootstrap();
